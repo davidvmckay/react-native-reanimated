@@ -54,7 +54,9 @@ ob.foo(5); // [this] is not correct
 
 #### `fn` [function]
 
-The first and the only argument is a function which is supposed to be run.
+The first and the only argument is a function which is supposed to be run;
+
+**`fn` must not return a value** -- once wrapped in `runOnJS`, results of `fn` will be ignored and discarded.  This is because `fn` will be invoked asynchronously, callsites of the wrapper created by `runOnJS` will ***not*** be automatically converted to asynchronous continuations, such as how `async..await` is automatically converted to continuations with `Promise.then()`.
 
 ### Returns
 
